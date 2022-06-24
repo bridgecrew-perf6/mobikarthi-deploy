@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: karthiapp1
+  name: karthiapp1
+  namespace: karthi-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karthiapp1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: karthiapp1
+    spec:
+      containers:
+      - image: karthikeyan4321/karthipush:appv1
+        name: karthipush
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: karthisvc1
+  name: karthisvc1
+  namespace: karthi-project
+spec:
+  ports:
+  - name: 1234-80
+    port: 1234
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: karthiapp1
+  type: NodePort
+status:
+  loadBalancer: {}
